@@ -19,7 +19,7 @@ def index():
     print(grouped_df)
     # Convert the data to JSON and pass it to the template
     data = grouped_df.to_json(orient='records')
-    return render_template('scatterplot.html', data=data)
+    return render_template('index.html', data=data)
 
 if __name__ == '__main__':
     app.run(debug=True)
