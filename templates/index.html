@@ -20,10 +20,8 @@
 <div class="container">
     <label>Indicator:</label>
 <select id="indicator_dropdown" class="dropdown">
-    {% for col in plot_df.columns %}
-        {% if col != 'Country Name' and col != 'year' %}
-            <option value="{{ col }}">{{ col }}</option>
-        {% endif %}
+    {% for col in variables %}
+        <option value="{{ col }}">{{ col }}</option>
     {% endfor %}
 </select>
     <p id="map_country">&nbsp;</p>

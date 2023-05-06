@@ -26,19 +26,17 @@ def data():
     selected_countries = ['Germany', 'France', 'Italy']  # Replace with your list of 40 countries
     plot_df = plot_df[plot_df['Country Name'].isin(selected_countries)]
     
-    # Group the data by country and year
     grouped_df = plot_df.groupby(['Country Name', 'year']).sum().reset_index()
 
-    # Select the most recent year
     most_recent_year = grouped_df['year'].max()
     grouped_df_for_pca = grouped_df[grouped_df['year'] == most_recent_year]
 
-    # Standardize the data for PCA
+    # Standardize for PCA
     X = grouped_df[plot_variables]
     scaler = StandardScaler()
     X_std = scaler.fit_transform(X)
 
-    # Perform PCA
+    #  PCA
     pca = PCA(n_components=2)
     pca.fit(X_std)
     pc = pca.transform(X_std)
@@ -47,11 +45,10 @@ def data():
     pca_df.index = X.index
     pca_df['Country Name'] = grouped_df['Country Name']
     print(pca_df)
-    # Convert the data to JSON and pass it to the template
+    # Convert to JSON
     data = pca_df.to_json(orient='records')
 
-    # return the index file and the data
-    return render_template("index.html", plot_df=plot_df, pca_df=json.dumps(data))
+    return render_template("index.html", pca_df=json.dumps(data), data=json.dumps(df.to_json(orient='records')), variables=plot_variables)
 
 if __name__ == '__main__':
     app.run()
