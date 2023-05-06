@@ -21,6 +21,8 @@ def data():
     cols_to_keep = plot_variables + ['year', 'Country Name']
     plot_df = df[cols_to_keep]
 
+    selected_countries = ['Germany', 'France', 'Italy']  # Replace with your list of 40 countries
+    plot_df = plot_df[plot_df['Country Name'].isin(selected_countries)]
     # Group the data by country and year
     grouped_df = plot_df.groupby(['Country Name', 'year']).sum().reset_index()
     print(grouped_df)
@@ -28,7 +30,7 @@ def data():
     data = grouped_df.to_json(orient='records')
 
     # return the index file and the data
-    return render_template("index.html", data=json.dumps(data))
+    return render_template("index.html", data=json.dumps(data), plot_df=plot_df)
 
 
 if __name__ == '__main__':
