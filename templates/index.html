@@ -51,7 +51,9 @@
 <script src="{{ url_for('static', filename='js/scatterplot.js') }}"></script>
 <script>scatterplot({{ pca_df | safe }})</script>
 <script src="{{ url_for('static', filename='js/dispatch.js') }}"></script>
-# to do: lineplot src
+
+<script src="{{ url_for('static', filename='js/lineplot.js') }}"></script>
+<script>lineplot( {{ data2 | safe }} )</script>
 
 </body>
 </html>

@@ -31,6 +31,11 @@ def data():
     
     grouped_df = plot_df.groupby(['Country Name', 'year']).sum().reset_index()
 
+    # for line plots
+    sel_dat_line = ['Country Name', 'year', plot_variables[0], plot_variables[1]]
+    data_line = grouped_df[sel_dat_line]
+    #data_line = data_line.rename(columns={plot_variables[0]: 'employed in agriculture', plot_variables[1]: 'agriculture in GDP'})
+
     most_recent_year = grouped_df['year'].max()
     grouped_df_for_pca = grouped_df[grouped_df['year'] == most_recent_year]
 
@@ -51,7 +56,7 @@ def data():
     # Convert to JSON
     data = pca_df.to_json(orient='records')
 
-    return render_template("index.html", pca_df=json.loads(data), data=json.dumps(df.to_json(orient='records')), variables=plot_variables, selected_countries=selected_countries)
+    return render_template("index.html", pca_df=json.loads(data), data=json.dumps(df.to_json(orient='records')), data2=json.loads(data_line.to_json(orient='records')), variables=plot_variables, selected_countries=selected_countries)
 
 if __name__ == '__main__':
     app.run()

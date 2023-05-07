@@ -42,6 +42,12 @@ function initMap(selected_countries) {
                     dispatch.call("countryHover", null, mouseOverCountry);
                 }
             })
+            .on("click", function(d, event) {
+            mouseClickCountry = d3.select(this).data()[0].properties.admin
+            if (selected_countries.includes(mouseClickCountry)) {
+                lineplot.call(mouseClickCountry);
+                }
+            });
             .on('mouseout', function(d) {
                 if (selected_countries.includes(d3.select(this).data()[0].properties.admin)) {
                     d3.select(this).attr('fill', 'black');
