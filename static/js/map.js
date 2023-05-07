@@ -3,8 +3,7 @@ let mapHeight = 500;
 let map = null;
 let mapData = null;
 
-
-function initMap() {
+function initMap(selected_countries) {
 
     // loads the world map as topojson
     d3.json("../static/data/world-topo.json").then(function (countries) {
@@ -34,8 +33,14 @@ function initMap() {
             .attr('d', path)
             .attr('stroke', 'black')
             .attr('stroke-width', 0.5)
-            .attr('fill', 'white');
+            .attr('fill', 'white')
+            
+        map.filter(function(d) {
+                return selected_countries.includes(d.properties.admin);
+             })
+             .attr('fill', 'blue');
+
     });
-
-
 }
+
+

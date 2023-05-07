@@ -48,7 +48,7 @@ def data():
     # Convert to JSON
     data = pca_df.to_json(orient='records')
 
-    return render_template("index.html", pca_df=json.dumps(data), data=json.dumps(df.to_json(orient='records')), variables=plot_variables)
+    return render_template("index.html", pca_df=json.dumps(data), data=json.dumps(df.to_json(orient='records')), variables=plot_variables, selected_countries=selected_countries)
 
 if __name__ == '__main__':
     app.run()
