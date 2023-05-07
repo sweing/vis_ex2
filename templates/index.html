@@ -43,7 +43,7 @@
 <script>
     let data = {{ data | safe }};
     let selected_countries = {{ selected_countries | tojson }}
-    console.log(data);
+    let countryForLinePlot = selected_countries[0]
 </script>
 
 <script src="{{ url_for('static', filename='js/map.js') }}"></script>
@@ -53,7 +53,7 @@
 <script src="{{ url_for('static', filename='js/dispatch.js') }}"></script>
 
 <script src="{{ url_for('static', filename='js/lineplot.js') }}"></script>
-<script>lineplot( {{ data2 | safe }} )</script>
+<script>lineplot( {{ data | safe }} )</script>
 
 </body>
 </html>
