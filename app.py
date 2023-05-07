@@ -21,8 +21,8 @@ plot_variables = ['Employment in agriculture (% of total employment) (modeled IL
 @app.route('/')
 def data():
     # Select the columns to plot
-    cols_to_keep = plot_variables + ['year', 'Country Name']
-    plot_df = df[cols_to_keep]
+    # cols_to_keep = plot_variables + ['year', 'Country Name']
+    plot_df = df
 
     selected_countries = ['Germany', 'France', 'Italy']  # Replace with your list of 40 countries
     selected_countries = random.sample(list(plot_df["Country Name"]), 40)
