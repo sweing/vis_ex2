@@ -40,13 +40,15 @@
 
 <script>
     let data = {{ data | safe }};
+    let selected_countries = {{ selected_countries | tojson }}
     console.log(data);
 </script>
 
 <script src="{{ url_for('static', filename='js/map.js') }}"></script>
-<script>initMap({{ selected_countries | tojson }})</script>
+<script>initMap(selected_countries)</script>
 <script src="{{ url_for('static', filename='js/scatterplot.js') }}"></script>
 <script>scatterplot({{ pca_df | safe }})</script>
+<script src="{{ url_for('static', filename='js/dispatch.js') }}"></script>
 
 </body>
 </html>

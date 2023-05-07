@@ -34,13 +34,28 @@ function initMap(selected_countries) {
             .attr('stroke', 'black')
             .attr('stroke-width', 0.5)
             .attr('fill', 'white')
+            .on('mouseover', function(d, event) {
+                //console.log(d3.select(this).data()[0].properties.admin)
+                mouseOverCountry = d3.select(this).data()[0].properties.admin
+                if (selected_countries.includes(mouseOverCountry)) {
+                    d3.select(this).attr('fill', 'red');
+                    dispatch.call("countryHover", null, mouseOverCountry);
+                }
+            })
+            .on('mouseout', function(d) {
+                if (selected_countries.includes(d3.select(this).data()[0].properties.admin)) {
+                    d3.select(this).attr('fill', 'black');
+                    dispatch.call("countryHover", null, null);
+                }
+            });
+
             
         map.filter(function(d) {
                 return selected_countries.includes(d.properties.admin);
              })
-             .attr('fill', 'blue');
+             .attr('fill', 'black');
 
+        
     });
 }
-
 

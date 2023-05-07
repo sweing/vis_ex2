@@ -1,5 +1,4 @@
 function scatterplot(data) {
-  console.log(data)
   // Set the dimensions of the plot
   var margin = {top: 20, right: 20, bottom: 30, left: 50},
       width = 600 - margin.left - margin.right,
@@ -36,6 +35,9 @@ function scatterplot(data) {
       .attr("transform", "translate(0," + height + ")")
       //.call(d3.axisBottom(x));
 
+
+  
+
   // Add the data points to the svg element
   svg.selectAll("circle")
       .data(data)
@@ -47,13 +49,14 @@ function scatterplot(data) {
         // Get the current circle element
         var currentCircle = d3.select(this);
         var currentCountry = currentCircle.data()[0]["Country Name"];
-        console.log(currentCountry)
-        // Update the style of the current circle
-        currentCircle.style("stroke", "red")
-                    .style("stroke-width", "4")
-                    .style("fill-opacity", "0.8");                
+        //console.log(currentCountry)
+        dispatch.call("countryHover", null, currentCountry);
+        // Update the style of the current circle     
       })
       .on("mouseout", function(d) {
         d3.select(this).style("stroke", "none");
+        dispatch.call("countryHover", null, null);
       });
+
+
 }
