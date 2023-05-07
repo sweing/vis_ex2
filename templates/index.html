@@ -13,7 +13,7 @@
 <body>
 
 <h1>InfoVis UE 2023 - Exercise 2</h1>
-<p>Enter your name and Matrikelnummer</p>
+<p>Stefan Weingaertner Weingärtner 00502640 & Joerg Wegscheider 00212105</p>
 
 
 <div id="main_container" class="main_container">
@@ -36,6 +36,8 @@
 <div id="svg_line_chart">
 </div>
 
+<div id="scatterplot"></div>
+
 <script>
     let data = {{ data | safe }};
     console.log(data);
@@ -43,7 +45,8 @@
 
 <script src="{{ url_for('static', filename='js/map.js') }}"></script>
 <script>initMap({{ selected_countries | tojson }})</script>
-
+<script src="{{ url_for('static', filename='js/scatterplot.js') }}"></script>
+<script>scatterplot({{ pca_df | safe }})</script>
 
 </body>
 </html>
