@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 import json
 import pandas as pd
+# from sklearn.preprocessing import PCA
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 import random
