@@ -42,7 +42,8 @@
 </script>
 
 <script src="{{ url_for('static', filename='js/map.js') }}"></script>
-<script>initMap()</script>
+<script>initMap({{ selected_countries | tojson }})</script>
+
 
 </body>
 </html>
