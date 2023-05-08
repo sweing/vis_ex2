@@ -21,9 +21,9 @@ function lineplot(data, country) {
   var xValues = filteredData.map(function(d) { return d["year"]; });
   var yValues = getYValues(filteredData, selectedOption.value);
 
-  var margin = {top: 20, right: 20, bottom: 30, left: 50},
-      width = 960 - margin.left - margin.right,
-      height = 500 - margin.top - margin.bottom;
+  var margin = {top: 20, right: 20, bottom: 30, left: 100},
+      width = 700 - margin.left - margin.right,
+      height = 300 - margin.top - margin.bottom;
   d3.select("#lineplot-svg").remove();
   var svg = d3.select("body").append("svg")
       .attr("id", "lineplot-svg")
