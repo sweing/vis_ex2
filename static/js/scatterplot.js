@@ -34,8 +34,6 @@ function scatterplot(data) {
   svg.append("g")
       .attr("transform", "translate(0," + height + ")")
       //.call(d3.axisBottom(x));
-
-
   
 
   // Add the data points to the svg element

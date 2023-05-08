@@ -44,9 +44,8 @@ function initMap(selected_countries) {
             })
             .on("click", function(d, event) {
             mouseClickCountry = d3.select(this).data()[0].properties.admin
-            if (selected_countries.includes(mouseClickCountry)) {
-                lineplot.call(mouseClickCountry);
-                }
+            console.log(mouseClickCountry)
+            lineplot(data, mouseClickCountry);
             })
             .on('mouseout', function(d) {
                 if (selected_countries.includes(d3.select(this).data()[0].properties.admin)) {

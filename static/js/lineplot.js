@@ -1,8 +1,20 @@
-function lineplot(data) {
+function lineplot(data, country) {
   data = JSON.parse(data);
 
+  // Check if the country variable is defined
+  if (typeof country === "undefined") {
+    // If it's not defined, show a message instead of the plot
+    d3.select("body")
+      .append("div")
+      .attr("id", "lineplot-message")
+      .text("Select a country on the map to show the plot.");
+    return; // Exit the function
+  } else {
+    d3.select("#lineplot-message").remove();
+  }
+
   const filteredData = data.filter(function(d) {
-    return d["Country Name"] === "Belgium";
+    return d["Country Name"] === country;
   });
 
   var countryValue = filteredData.map(function(d) { return d["Country Name"]; });
@@ -12,8 +24,9 @@ function lineplot(data) {
   var margin = {top: 20, right: 20, bottom: 30, left: 50},
       width = 960 - margin.left - margin.right,
       height = 500 - margin.top - margin.bottom;
-
+  d3.select("#lineplot-svg").remove();
   var svg = d3.select("body").append("svg")
+      .attr("id", "lineplot-svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       .append("g")
@@ -37,6 +50,15 @@ function lineplot(data) {
     .attr("d", line)
     .style("fill", "none")
     .style("stroke", "black");
+
+
+  svg.append("text")
+   .attr("id", "plot-title")
+   .attr("x", width / 2)
+   .attr("y", 30)
+   .style("text-anchor", "middle")
+   .style("font-size", "16px")
+   .text(selectedOption.value + " in " + country);
 
   // year format on x axis
   var xAxis = d3.axisBottom(x)
@@ -65,6 +87,9 @@ function lineplot(data) {
     // update the y scale domain
     y.domain(d3.extent(yValues));
 
+    d3.select("#plot-title")
+      .text(selectedOption.value + " in " + country); 
+    
     // Update the y axis
     svg.select(".y-axis")
       .transition()
