@@ -71,7 +71,19 @@ function lineplot(data, country) {
 
   svg.append("g")
       .attr("class", "y-axis")
-      .call(d3.axisLeft(y));
+      .call(d3.axisLeft(y))
+
+  let match = selectedOption.value.match(/\(([^)]+)\)/)
+  let textInsideParentheses = match ? match[1] : null;
+
+ svg.append("text")
+    .attr("class", "y-axis-title")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 0 - margin.left)
+    .attr("x", 0 - (height / 2))
+    .attr("dy", "1em")
+    .style("text-anchor", "middle")
+    .text(textInsideParentheses);
 
   // define a function to get y values for the selected option
   function getYValues(data, selectedOption) {
@@ -89,12 +101,17 @@ function lineplot(data, country) {
 
     d3.select("#plot-title")
       .text(selectedOption.value + " in " + country); 
-    
+
     // Update the y axis
     svg.select(".y-axis")
       .transition()
       .duration(500)
       .call(d3.axisLeft(y));
+
+    let match = selectedOption.value.match(/\(([^)]+)\)/)
+    let textInsideParentheses = match ? match[1] : null;
+    svg.select(".y-axis-title")
+      .text(textInsideParentheses);
 
     // update the line
     svg.select(".line")
