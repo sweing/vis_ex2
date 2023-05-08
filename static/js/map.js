@@ -43,9 +43,12 @@ function initMap(selected_countries) {
                 }
             })
             .on("click", function(d, event) {
-            mouseClickCountry = d3.select(this).data()[0].properties.admin
-            console.log(mouseClickCountry)
-            lineplot(data, mouseClickCountry);
+                mouseClickCountry = d3.select(this).data()[0].properties.admin
+                if (selected_countries.includes(mouseClickCountry)) {
+                    console.log(mouseClickCountry)
+                    lineplot(data, mouseClickCountry);
+                }
+                
             })
             .on('mouseout', function(d) {
                 if (selected_countries.includes(d3.select(this).data()[0].properties.admin)) {

@@ -8,13 +8,13 @@ function lineplot(data, country) {
       .append("div")
       .attr("id", "lineplot-message")
       .text("Select a country on the map to show the plot.");
-    return; // Exit the function
+      return; // Exit the function
   } else {
-    d3.select("#lineplot-message").remove();
+      d3.select("#lineplot-message").remove();
   }
 
   const filteredData = data.filter(function(d) {
-    return d["Country Name"] === country;
+      return d["Country Name"] === country;
   });
 
   var countryValue = filteredData.map(function(d) { return d["Country Name"]; });
@@ -41,28 +41,28 @@ function lineplot(data, country) {
       .range([height, 0]);
 
   var line = d3.line()
-    .x(function(d, i) { return x(xValues[i]); })
-    .y(function(d, i) { return y(yValues[i]); });
+      .x(function(d, i) { return x(xValues[i]); })
+      .y(function(d, i) { return y(yValues[i]); });
 
   svg.append("path")
-    .datum(filteredData)
-    .attr("class", "line")
-    .attr("d", line)
-    .style("fill", "none")
-    .style("stroke", "black");
+      .datum(filteredData)
+      .attr("class", "line")
+      .attr("d", line)
+      .style("fill", "none")
+      .style("stroke", "black");
 
 
   svg.append("text")
-   .attr("id", "plot-title")
-   .attr("x", width / 2)
-   .attr("y", 30)
-   .style("text-anchor", "middle")
-   .style("font-size", "16px")
-   .text(selectedOption.value + " in " + country);
+      .attr("id", "plot-title")
+      .attr("x", width / 2)
+      .attr("y", 30)
+      .style("text-anchor", "middle")
+      .style("font-size", "16px")
+      .text(selectedOption.value + " in " + country);
 
   // year format on x axis
   var xAxis = d3.axisBottom(x)
-    .tickFormat(d3.format("d")); // Use "d" format specifier to remove comma separator
+     .tickFormat(d3.format("d")); // Use "d" format specifier to remove comma separator
 
 
   svg.append("g")
@@ -77,47 +77,47 @@ function lineplot(data, country) {
   let textInsideParentheses = match ? match[1] : null;
 
  svg.append("text")
-    .attr("class", "y-axis-title")
-    .attr("transform", "rotate(-90)")
-    .attr("y", 0 - margin.left)
-    .attr("x", 0 - (height / 2))
-    .attr("dy", "1em")
-    .style("text-anchor", "middle")
-    .text(textInsideParentheses);
+      .attr("class", "y-axis-title")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - margin.left)
+      .attr("x", 0 - (height / 2))
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .text(textInsideParentheses);
 
   // define a function to get y values for the selected option
   function getYValues(data, selectedOption) {
-    return data.map(obj => obj[selectedOption]);
+      return data.map(obj => obj[selectedOption]);
   }
 
   // add a change event listener to the dropdown
   d3.select("#indicator_dropdown").on("change", function() {
-    // update the yValues variable
-    yValues = getYValues(filteredData, selectedOption.value);
-    console.log(yValues)
+      // update the yValues variable
+      yValues = getYValues(filteredData, selectedOption.value);
+      console.log(yValues)
 
-    // update the y scale domain
-    y.domain(d3.extent(yValues));
+      // update the y scale domain
+      y.domain(d3.extent(yValues));
 
-    d3.select("#plot-title")
-      .text(selectedOption.value + " in " + country); 
+      d3.select("#plot-title")
+          .text(selectedOption.value + " in " + country); 
 
-    // Update the y axis
-    svg.select(".y-axis")
-      .transition()
-      .duration(500)
-      .call(d3.axisLeft(y));
+      // Update the y axis
+      svg.select(".y-axis")
+          .transition()
+          .duration(500)
+          .call(d3.axisLeft(y));
 
-    let match = selectedOption.value.match(/\(([^)]+)\)/)
-    let textInsideParentheses = match ? match[1] : null;
-    svg.select(".y-axis-title")
-      .text(textInsideParentheses);
+      let match = selectedOption.value.match(/\(([^)]+)\)/)
+      let textInsideParentheses = match ? match[1] : null;
+      svg.select(".y-axis-title")
+          .text(textInsideParentheses);
 
-    // update the line
-    svg.select(".line")
-      .datum(filteredData)
-      .transition()
-      .duration(1000)
-      .attr("d", line);
-  });
+      // update the line
+      svg.select(".line")
+          .datum(filteredData)
+          .transition()
+          .duration(1000)
+          .attr("d", line);
+    });
 }

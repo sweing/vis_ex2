@@ -26,7 +26,7 @@ function scatterplot(data) {
   var svg = d3.select("#scatterplot").append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
-    .append("g")
+      .append("g")
       .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
 
@@ -39,21 +39,21 @@ function scatterplot(data) {
   // Add the data points to the svg element
   svg.selectAll("circle")
       .data(data)
-    .enter().append("circle")
+      .enter().append("circle")
       .attr("cx", function(d) { return x(d.PC1); })
       .attr("cy", function(d) { return y(d.PC2); })
       .attr("r", 5)
       .on("mouseover", function(d) {
-        // Get the current circle element
-        var currentCircle = d3.select(this);
-        var currentCountry = currentCircle.data()[0]["Country Name"];
-        //console.log(currentCountry)
-        dispatch.call("countryHover", null, currentCountry);
-        // Update the style of the current circle     
+          // Get the current circle element
+          var currentCircle = d3.select(this);
+          var currentCountry = currentCircle.data()[0]["Country Name"];
+          //console.log(currentCountry)
+          dispatch.call("countryHover", null, currentCountry);
+          // Update the style of the current circle     
       })
       .on("mouseout", function(d) {
-        d3.select(this).style("stroke", "none");
-        dispatch.call("countryHover", null, null);
+          d3.select(this).style("stroke", "none");
+          dispatch.call("countryHover", null, null);
       });
 
 
