@@ -8,7 +8,7 @@ function lineplot(data, country) {
       .append("div")
       .attr("id", "lineplot-message")
       .text("Select a country on the map to show the plot.");
-      return; // Exit the function
+       return; // Exit the function
   } else {
       d3.select("#lineplot-message").remove();
   }
@@ -25,7 +25,7 @@ function lineplot(data, country) {
       width = 700 - margin.left - margin.right,
       height = 300 - margin.top - margin.bottom;
   d3.select("#lineplot-svg").remove();
-  var svg = d3.select("body").append("svg")
+  var svg = d3.select("#lineplot").append("svg")
       .attr("id", "lineplot-svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
