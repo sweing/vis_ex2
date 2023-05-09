@@ -17,50 +17,46 @@
 
 
 <div id="main_container" class="main_container">
-<div class="container">
-    <label>Indicator:</label>
-<select id="indicator_dropdown" class="dropdown">
-    {% for col in variables %}
-        <option value="{{ col }}">{{ col }}</option>
-    {% endfor %}
-</select>
-    <p id="map_country">&nbsp;</p>
-    <svg id="svg_map"></svg>
+    <div class="container">
+        <label>Indicator:</label>
+        <select id="indicator_dropdown" class="dropdown">
+            {% for col in variables %}
+                <option value="{{ col }}">{{ col }}</option>
+            {% endfor %}
+        </select>
+        <p id="map_country">&nbsp;</p>
+        <svg id="svg_map"></svg>
+    </div>
+    <div class="container">
+        <p id="country">&nbsp;</p>
+        <div id="scatterplot"></div>
+    </div>
+    <div class="container">
+        <p id="country">&nbsp;</p>
+        <div id="lineplot"></div>
+    </div>
 </div>
-<div class="container">
-    <p id="country">&nbsp;</p>
-    <svg id="svg_plot"></svg>
-</div>
-</div>
+    
 
-<div id="svg_line_chart">
-</div>
-
-<div id="scatterplot"></div>
-
-<div id="lineplot"></div>
+<script src="{{ url_for('static', filename='js/map.js') }}"></script>
+<script src="{{ url_for('static', filename='js/scatterplot.js') }}"></script>
+<script src="{{ url_for('static', filename='js/dispatch.js') }}"></script>
+<script src="{{ url_for('static', filename='js/lineplot.js') }}"></script>
 
 <script>
     let data = {{ data | safe }};
     let selected_countries = {{ selected_countries | tojson }}
     let countryForLinePlot = selected_countries[0]
-    const dropdown = document.getElementById("indicator_dropdown");
-    const selectedOption = { value: dropdown.value };
+    let dropdown = document.getElementById("indicator_dropdown");
+    let selectedOption = { value: dropdown.value };
     dropdown.addEventListener("change", function() {
-      selectedOption.value = this.value;
+        selectedOption.value = this.value;
     });
 
-
+    initMap(selected_countries)
+    scatterplot({{ pca_df | safe }})
+    lineplot({{ data | safe }})
 </script>
-
-<script src="{{ url_for('static', filename='js/map.js') }}"></script>
-<script>initMap(selected_countries)</script>
-<script src="{{ url_for('static', filename='js/scatterplot.js') }}"></script>
-<script>scatterplot({{ pca_df | safe }})</script>
-<script src="{{ url_for('static', filename='js/dispatch.js') }}"></script>
-
-<script src="{{ url_for('static', filename='js/lineplot.js') }}"></script>
-<script>lineplot( {{ data | safe }} )</script>
 
 </body>
 </html>

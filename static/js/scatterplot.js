@@ -2,7 +2,7 @@ function scatterplot(data) {
   // Set the dimensions of the plot
   var margin = {top: 20, right: 20, bottom: 30, left: 50},
       width = 600 - margin.left - margin.right,
-      height = 300 - margin.top - margin.bottom;
+      height = 450 - margin.top - margin.bottom;
 
   // Get the max and min values for PC1 and PC2
   var xValues = data.map(function(d) { return d.PC1; });

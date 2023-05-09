@@ -4,7 +4,7 @@ function lineplot(data, country) {
   // Check if the country variable is defined
   if (typeof country === "undefined") {
     // If it's not defined, show a message instead of the plot
-    d3.select("body")
+    d3.select("#lineplot")
       .append("div")
       .attr("id", "lineplot-message")
       .text("Select a country on the map to show the plot.");
