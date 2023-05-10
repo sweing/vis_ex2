@@ -55,7 +55,7 @@ function lineplot(data, country) {
   svg.append("text")
       .attr("id", "plot-title")
       .attr("x", width / 2)
-      .attr("y", 30)
+      .attr("y", -5)
       .style("text-anchor", "middle")
       .style("font-size", "16px")
       .text(selectedOption.value + " in " + country);
