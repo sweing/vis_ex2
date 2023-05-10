@@ -24,4 +24,10 @@ dispatch.on("countryHover", function(countryName) {
             return d["Country Name"] != countryName;
         })
         .attr("fill", "black"); 
+
+    d3.select("#scatterplot-title")
+          .text(countryName); 
+
+    datatable(data, countryName, selectedVariables)
+    
 });

@@ -35,6 +35,13 @@ function scatterplot(data) {
       .attr("transform", "translate(0," + height + ")")
       //.call(d3.axisBottom(x));
   
+    svg.append("text")
+      .attr("id", "scatterplot-title")
+      .attr("x", width / 2)
+      .attr("y", 0)
+      .style("text-anchor", "middle")
+      .style("font-size", "16px")
+      .text(null);
 
   // Add the data points to the svg element
   svg.selectAll("circle")
@@ -43,6 +50,16 @@ function scatterplot(data) {
       .attr("cx", function(d) { return x(d.PC1); })
       .attr("cy", function(d) { return y(d.PC2); })
       .attr("r", 5)
+      .attr("title", function(d) {
+        // Format the data as a table in the tooltip
+        var tooltipText = "<table>";
+        for (var key in d) {
+            tooltipText += "<tr><td>" + key + "</td><td>" + d[key] + "</td></tr>";
+        }
+        tooltipText += "</table>";
+       return tooltipText;
+      })
+      .attr("opacity", 0.6)
       .on("mouseover", function(d) {
           // Get the current circle element
           var currentCircle = d3.select(this);

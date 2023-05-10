@@ -62,8 +62,7 @@ function lineplot(data, country) {
 
   // year format on x axis
   var xAxis = d3.axisBottom(x)
-     .tickFormat(d3.format("d")); // Use "d" format specifier to remove comma separator
-
+     .tickFormat(d3.format("d")); // Use "d" to remove comma separator
 
   svg.append("g")
       .attr("transform", "translate(0," + height + ")")
