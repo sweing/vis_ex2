@@ -61,7 +61,8 @@ function initMap(selected_countries) {
         map.filter(function(d) {
                 return selected_countries.includes(d.properties.admin);
              })
-             .attr('fill', 'black');
+             .attr('fill', 'black')
+             .attr("opacity", 0.6);
 
         
     });
